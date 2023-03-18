@@ -249,23 +249,6 @@ app.get("/api/metatags/:id", (req, res) => {
   });
 });
 
-// app.post("/api/metatags", (req, res) => {
-//   const { title, description, date_added, date_updated } = req.body;
-
-//   const sql =
-//     "INSERT INTO meta_tags (title, description, date_added, date_updated) VALUES (?, ?, ?, ?)";
-//   const values = [title, description, date_added, date_updated];
-
-//   db.query(sql, values, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//       res.status(500).send("Error inserting new meta tag");
-//     } else {
-//       res.status(200).send("New meta tag added successfully");
-//     }
-//   });
-// });
-
 app.post("/api/metatags", (req, res) => {
   const { title, description, selectedValue } = req.body;
 
@@ -322,6 +305,10 @@ app.delete("/api/metatags/:id", (req, res) => {
     }
   });
 });
+
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("client/build"));
+}
 
 app.listen(port, () =>
   console.log(`Blog app listening at http://localhost:${port}`)
