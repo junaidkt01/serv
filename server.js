@@ -9,7 +9,7 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
-const port = 3002;
+const port = process.env.PORT || 3002;
 
 app.use(express.static("uploads"));
 app.use(bodyParser.json());
